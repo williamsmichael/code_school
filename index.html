@@ -1,13 +1,28 @@
+<!-- Shaping up with Angular.js -->
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="store">
 <head>
-	<title></title>
+	<title>Shaping up with Angular.js | CodeSchool.com</title>
 	<meta charset="UTF-8">
-	<meta name="description" content="">
+	<meta name="description" content="Shaping up with Angular.js | CodeSchool.com">
 	<meta name="keywords" content="HTML, CSS, Angular">
 	<meta name="author" content="mple by Michael Williams">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
-<body>
 
+<body class="container" ng-controller="StoreController as store">
+
+	<div class="product row" ng-repeat="product in store.products">
+
+		<h1>{{product.name}}</h1>
+		<h2><em class="pull-right">${{product.price}}</em></h2>
+		<p>{{product.description}}</p>
+		<button ng-show="product.canPurchase">Add to Cart</button>
+	</div>
+
+	<!-- scripts -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+	<script type="text/javascript" src="app.js"></script>
 </body>
 </html>
