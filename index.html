@@ -11,15 +11,46 @@
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 
-<body class="container" ng-controller="StoreController as store">
+<body ng-controller="StoreController as store">
 
-	<div class="product row" ng-repeat="product in store.products">
+	<ul class="list-group">
 
-		<h1>{{product.name}}</h1>
-		<h2><em class="pull-right">${{product.price}}</em></h2>
-		<p>{{product.description}}</p>
-		<button ng-show="product.canPurchase">Add to Cart</button>
-	</div>
+		<li class="list-group-item" ng-repeat="product in store.products">
+
+			<h3>
+				{{product.name}}
+				<em class="pull-right">{{product.price | currency}}</em>
+			</h3>
+			<div class="text-center">
+				<img ng-src="{{product.images.thumb}}">
+			</div>
+			<section ng-controller="PanelController as panel">
+				<ul class="nav nav-pills">
+					<li ng-class="{active:panel.isSelected(1)}"> 
+						<a href ng-click="panel.selectTab(1)">Description</a> 
+					</li>
+					<li ng-class="{active:panel.isSelected(2)}"> 
+						<a href ng-click="panel.selectTab(2)">Specifications</a> 
+					</li>
+					<li ng-class="{active:panel.isSelected(3)}"> 
+						<a href ng-click="panel.selectTab(3)">Reviews</a> 
+					</li>
+				</ul>
+				<div class="panel" ng-show="panel.isSelected(1)">
+					<h4>Description</h4>
+					<p>{{product.description}}</p>
+				</div>			
+				<div class="panel" ng-show="panel.isSelected(2)">
+					<h4>Specifications</h4>
+					<blockquote>None yet</blockquote>
+				</div>			
+				<div class="panel" ng-show="panel.isSelected(3)">
+					<h4>Reviews</h4>
+					<blockquote>None yet</blockquote>
+				</div>
+			</section>
+		</li>
+	</ul>
 
 	<!-- scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
